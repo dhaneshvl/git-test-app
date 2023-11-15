@@ -36,6 +36,8 @@ jobs:
     needs: build
     runs-on: [AWS_EC2_RUNNER]
     steps:
+      - name: Remove existing Docker image on AWS EC2
+        run: docker rmi dhaneshvl/git-docker-test:latest || true
       - name: Pull the image from Docker Hub
         run: docker pull dhaneshvl/git-docker-test:latest
       - name: Run Docker image on AWS EC2
