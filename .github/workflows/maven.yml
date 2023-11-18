@@ -49,10 +49,10 @@ jobs:
         shell: bash
 
       - name: Remove the existing Docker image on AWS EC2
-        run: docker rmi dhaneshvl/git-docker-test:latest || true
+        run: docker rmi dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }} || true
 
       - name: Pull the image from Docker Hub
-        run: docker pull dhaneshvl/git-docker-test:latest
+        run: docker pull dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }}
 
       - name: Run Docker image on AWS EC2
-        run: docker run -d -p 8080:8080 dhaneshvl/git-docker-test:latest
+        run: docker run -d -p 8080:8080 dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }}
