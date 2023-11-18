@@ -52,6 +52,7 @@ jobs:
           echo -e "StrictHostKeyChecking no\n" > ~/.ssh/config
           ssh-keyscan -t rsa 54.175.39.55 >> ~/.ssh/known_hosts
           cat ~/.ssh/known_hosts  # For debugging, check the contents of known_hosts
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -T ec2-user@54.175.39.55
 
       - name: Remove the existing Docker image on AWS EC2
         run: |
