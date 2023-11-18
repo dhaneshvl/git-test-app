@@ -33,9 +33,9 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          push: true
-          pull: false
-          reuse: true
+          push: true  # Set to true to push the Docker image
+          pull: false  # Set to false to skip pulling the base image
+          reuse: true  # Set to true to fail the build if the image already exists
 
   deploy:
     needs: build
