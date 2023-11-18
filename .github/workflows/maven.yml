@@ -44,7 +44,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Configure SSH
+      - name: Configure SSH AWS
         run:
           ssh -i /home/ec2-user/dhanesh_aws_key.pem -o StrictHostKeyChecking=no -T ec2-user@54.175.39.55
 
