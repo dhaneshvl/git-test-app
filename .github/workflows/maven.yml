@@ -43,29 +43,16 @@ jobs:
   deploy:
     needs: build
     runs-on: [ AWS_EC2_RUNNER ]
-
     steps:
       - name: Add user to docker group
         run: sudo usermod -aG docker $USER
         shell: bash
 
-      - name: Extract version from Docker image name
-        run: |
-          SPRING_BOOT_VERSION=$(echo "${{ github.event_name }}" | tr '[:upper:]' '[:lower:]')
-          echo "SPRING_BOOT_VERSION=$SPRING_BOOT_VERSION" >> $GITHUB_ENV
-
-      - name: Check if Docker image exists
-        run: docker inspect dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }} > /dev/null 2>&1 || true
-        continue-on-error: true
-
       - name: Remove the existing Docker image on AWS EC2
-        run: docker rmi dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }} || true
+        run: docker rmi dhaneshvl/git-docker-test:latest || true
 
       - name: Pull the image from Docker Hub
-        run: docker pull dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }}
-
-      - name: Wait for Docker to settle
-        run: sleep 10
+        run: docker pull dhaneshvl/git-docker-test:latest
 
       - name: Run Docker image on AWS EC2
-        run: docker run -d -p 8080:8080 dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }}
+        run: docker run -d -p 8080:8080 dhaneshvl/git-docker-test:latest
