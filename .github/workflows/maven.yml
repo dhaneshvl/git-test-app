@@ -44,7 +44,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Configure SSH
+      - name: Configure SSH For AWS
         run: |
           echo "StrictHostKeyChecking no" > ~/.ssh/config
           ssh-keyscan -t rsa 54.175.39.55 >> ~/.ssh/known_hosts
