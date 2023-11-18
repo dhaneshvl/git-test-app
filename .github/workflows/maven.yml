@@ -49,13 +49,13 @@ jobs:
         shell: bash
 
       - name: Remove the existing Docker image on AWS EC2
-        run: docker rmi dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }} || true
+        run: docker rmi dhaneshvl/git-docker-test:0.0.1-SNAPSHOT || true
 
       - name: Set Docker image tag for deployment
         run: echo "DOCKER_IMAGE_TAG=${{ env.SPRING_BOOT_VERSION }}" >> $GITHUB_ENV
 
       - name: Pull the image from Docker Hub
-        run: docker pull dhaneshvl/git-docker-test:${{ env.DOCKER_IMAGE_TAG }}
+        run: docker pull dhaneshvl/git-docker-test:0.0.1-SNAPSHOT
 
       - name: Run Docker image on AWS EC2
-        run: docker run -d -p 8080:8080 dhaneshvl/git-docker-test:${{ env.DOCKER_IMAGE_TAG }}
+        run: docker run -d -p 8080:8080 dhaneshvl/git-docker-test:0.0.1-SNAPSHOT
