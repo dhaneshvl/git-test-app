@@ -49,6 +49,11 @@ jobs:
         run: sudo usermod -aG docker $USER
         shell: bash
 
+      - name: Extract version from Docker image name
+        run: |
+          SPRING_BOOT_VERSION=$(echo "${{ github.event_name }}" | tr '[:upper:]' '[:lower:]')
+          echo "SPRING_BOOT_VERSION=$SPRING_BOOT_VERSION" >> $GITHUB_ENV
+
       - name: Check if Docker image exists
         run: docker inspect dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }} > /dev/null 2>&1 || true
         continue-on-error: true
