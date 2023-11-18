@@ -23,7 +23,9 @@ jobs:
         run: mvn clean install
 
       - name: Extract version from pom.xml
-        run: echo "::set-env name=SPRING_BOOT_VERSION::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)"
+        run: |
+          SPRING_BOOT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo "SPRING_BOOT_VERSION=$SPRING_BOOT_VERSION" >> $GITHUB_ENV
 
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
