@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Configure SSH AWS
         run:
-          ssh -v -i /home/ec2-user/dhanesh_aws_key.pem -o StrictHostKeyChecking=no -T ec2-user@54.175.39.55
+          ssh -i /home/ec2-user/dhanesh_aws_key.pem ec2-user@54.175.39.55
 
       - name: Remove the existing Docker image on AWS EC2
         run: |
