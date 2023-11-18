@@ -27,6 +27,16 @@ jobs:
           SPRING_BOOT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo "SPRING_BOOT_VERSION=$SPRING_BOOT_VERSION" >> $GITHUB_ENV
 
+      - name: Check if Docker image already exists
+        id: check_docker_image
+        run: |
+          if docker manifest inspect dhaneshvl/git-docker-test:${{ env.SPRING_BOOT_VERSION }} > /dev/null 2>&1; then
+            echo "Docker image with tag ${SPRING_BOOT_VERSION} already exists on Docker Hub."
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi    
+
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
