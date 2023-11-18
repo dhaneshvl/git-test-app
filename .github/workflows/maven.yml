@@ -46,6 +46,7 @@ jobs:
     steps:
       - name: Configure SSH
         run: |
+          rm -rf ~/.ssh
           mkdir -p ~/.ssh
           echo "StrictHostKeyChecking no" > ~/.ssh/config
           ssh-keyscan -t rsa 54.175.39.55 >> ~/.ssh/known_hosts
