@@ -50,6 +50,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa 54.175.39.55 >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts  # For debugging, check the contents of known_hosts
 
       - name: Remove the existing Docker image on AWS EC2
         run: |
