@@ -57,5 +57,8 @@ jobs:
       - name: Pull the image from Docker Hub
         run: docker pull dhaneshvl/git-docker-test:0.0.1-SNAPSHOT
 
+      - name: Stop the currently running Docker Image
+        run: docker run -d -p 8080:8080 dhaneshvl/git-docker-test:latest
+
       - name: Run Docker image on AWS EC2
         run: docker run -d -p 8080:8080 dhaneshvl/git-docker-test:0.0.1-SNAPSHOT
