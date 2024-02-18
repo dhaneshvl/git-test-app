@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>git-docker-test</name>
 	<description>Demo project for Spring Boot</description>
+	<packaging>war</packaging> <!-- Change packaging type to war -->
 	<properties>
 		<java.version>11</java.version>
 	</properties>
